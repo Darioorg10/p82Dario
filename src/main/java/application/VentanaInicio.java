@@ -8,12 +8,14 @@ package application;
  *
  * @author dario
  */
-public class VentanaAPP extends javax.swing.JFrame {
+public class VentanaInicio extends javax.swing.JFrame {
+    
+    // La ventana mide 1038x511
 
     /**
      * Creates new form VentanaAPP
      */
-    public VentanaAPP() {
+    public VentanaInicio() {
         initComponents();
     }
 
@@ -31,8 +33,8 @@ public class VentanaAPP extends javax.swing.JFrame {
         titulo = new javax.swing.JLabel();
         botonConsulta = new javax.swing.JButton();
         botonInsercion = new javax.swing.JButton();
+        botonActualizar = new javax.swing.JButton();
         botonBorrar = new javax.swing.JButton();
-        botonBorrar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,36 +56,51 @@ public class VentanaAPP extends javax.swing.JFrame {
         botonConsulta.setText("Consultar datos");
         botonConsulta.setBorder(null);
         botonConsulta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonConsultaMouseClicked(evt);
+            }
+        });
         PanelPrincipal.add(botonConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 270, 150));
 
         botonInsercion.setBackground(new java.awt.Color(255, 75, 0));
         botonInsercion.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
         botonInsercion.setForeground(new java.awt.Color(238, 238, 238));
-        botonInsercion.setText("Añadir datos");
+        botonInsercion.setText("Insertar datos");
         botonInsercion.setBorder(null);
         botonInsercion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonInsercion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonInsercionActionPerformed(evt);
+        botonInsercion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonInsercionMouseClicked(evt);
             }
         });
         PanelPrincipal.add(botonInsercion, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 270, 150));
 
+        botonActualizar.setBackground(new java.awt.Color(255, 75, 0));
+        botonActualizar.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
+        botonActualizar.setForeground(new java.awt.Color(238, 238, 238));
+        botonActualizar.setText("Actualizar datos");
+        botonActualizar.setBorder(null);
+        botonActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonActualizarMouseClicked(evt);
+            }
+        });
+        PanelPrincipal.add(botonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 270, 150));
+
         botonBorrar.setBackground(new java.awt.Color(255, 75, 0));
         botonBorrar.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
         botonBorrar.setForeground(new java.awt.Color(238, 238, 238));
-        botonBorrar.setText("Actualizar datos");
+        botonBorrar.setText("Borrar datos");
         botonBorrar.setBorder(null);
         botonBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        PanelPrincipal.add(botonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 330, 270, 150));
-
-        botonBorrar1.setBackground(new java.awt.Color(255, 75, 0));
-        botonBorrar1.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
-        botonBorrar1.setForeground(new java.awt.Color(238, 238, 238));
-        botonBorrar1.setText("Borrar datos");
-        botonBorrar1.setBorder(null);
-        botonBorrar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        PanelPrincipal.add(botonBorrar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 270, 150));
+        botonBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonBorrarMouseClicked(evt);
+            }
+        });
+        PanelPrincipal.add(botonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 270, 150));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,10 +116,55 @@ public class VentanaAPP extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonInsercionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsercionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonInsercionActionPerformed
+    // Al pulsar el botón de consultar datos
+    private void botonConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonConsultaMouseClicked
+        // TODO add your handling code here:     
+        VentanaConsultar ventanaConsultar = new VentanaConsultar();
+        ventanaConsultar.setVisible(true);         
+        ventanaConsultar.setResizable(false);
+        ventanaConsultar.setLocationRelativeTo(null);
+        // Esto es para que la ventana actual se cierre
+        this.dispose();    
+    }//GEN-LAST:event_botonConsultaMouseClicked
 
+    // Al pulsar el botón de insertar datos
+    private void botonInsercionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInsercionMouseClicked
+        // TODO add your handling code here:
+        VentanaInsertar ventanaInsertar = new VentanaInsertar();
+        ventanaInsertar.setVisible(true);         
+        ventanaInsertar.setResizable(false);
+        ventanaInsertar.setLocationRelativeTo(null);
+        // Esto es para que la ventana actual se cierre
+        this.dispose();    
+    }//GEN-LAST:event_botonInsercionMouseClicked
+
+    
+    // Al pulsar el botón de modificar datos
+    private void botonActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarMouseClicked
+        // TODO add your handling code here:        
+        // Creamos un objeto de tipo de la ventanaActualizar y lo ponemos visible y en el centro
+        VentanaActualizar ventanaActualizar = new VentanaActualizar();
+        ventanaActualizar.setVisible(true);         
+        ventanaActualizar.setResizable(false);
+        ventanaActualizar.setLocationRelativeTo(null);
+        // Esto es para que la ventana actual se cierre
+        this.dispose();        
+        
+    }//GEN-LAST:event_botonActualizarMouseClicked
+
+    // Al pulsar el botón de eliminar datos
+    private void botonBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBorrarMouseClicked
+        // TODO add your handling code here:
+        VentanaBorrar ventanaBorrar = new VentanaBorrar();
+        ventanaBorrar.setVisible(true);         
+        ventanaBorrar.setResizable(false);
+        ventanaBorrar.setLocationRelativeTo(null);
+        // Esto es para que la ventana actual se cierre
+        this.dispose();    
+    }//GEN-LAST:event_botonBorrarMouseClicked
+                                                               
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -121,28 +183,32 @@ public class VentanaAPP extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaAPP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaAPP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaAPP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaAPP.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaInicio.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaAPP().setVisible(true);
+                new VentanaInicio().setVisible(true);
             }
-        });
+        });                
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonBorrar;
-    private javax.swing.JButton botonBorrar1;
     private javax.swing.JButton botonConsulta;
     private javax.swing.JButton botonInsercion;
     private javax.swing.JSeparator jSeparator1;
