@@ -4,16 +4,21 @@
  */
 package application;
 
+import controllers.FacturaJpaController;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dario
  */
-public class VentanaActualizar extends javax.swing.JFrame {
+public class VentanaBuscar extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaActualizar
      */
-    public VentanaActualizar() {
+    public VentanaBuscar() {
         initComponents();
     }
 
@@ -29,6 +34,10 @@ public class VentanaActualizar extends javax.swing.JFrame {
         PanelPrincipal = new javax.swing.JPanel();
         botonRegresar = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
+        codigoJLabel = new javax.swing.JLabel();
+        codigoTextField = new javax.swing.JTextField();
+        botonActualizar = new javax.swing.JButton();
+        facturaJLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,13 +55,43 @@ public class VentanaActualizar extends javax.swing.JFrame {
                 botonRegresarMouseClicked(evt);
             }
         });
-        PanelPrincipal.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 270, 110));
+        PanelPrincipal.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 350, 270, 110));
 
         titulo.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         titulo.setForeground(new java.awt.Color(0, 173, 181));
         titulo.setText("ACTUALIZA FACTURAS");
         titulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         PanelPrincipal.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 40, 420, 60));
+
+        codigoJLabel.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        codigoJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        codigoJLabel.setText("- Codigo:");
+        PanelPrincipal.add(codigoJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, 110, -1));
+
+        codigoTextField.setBackground(new java.awt.Color(255, 255, 255));
+        codigoTextField.setForeground(new java.awt.Color(0, 0, 0));
+        PanelPrincipal.add(codigoTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 270, 50));
+
+        botonActualizar.setBackground(new java.awt.Color(255, 75, 0));
+        botonActualizar.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
+        botonActualizar.setForeground(new java.awt.Color(238, 238, 238));
+        botonActualizar.setText("Buscar");
+        botonActualizar.setBorder(null);
+        botonActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonActualizarMouseClicked(evt);
+            }
+        });
+        botonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonActualizarActionPerformed(evt);
+            }
+        });
+        PanelPrincipal.add(botonActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 130, 270, 110));
+
+        facturaJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.add(facturaJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, 280, 220));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -77,6 +116,27 @@ public class VentanaActualizar extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonRegresarMouseClicked
 
+    private void botonActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonActualizarMouseClicked
+
+    // Cuando le damos al botón de actualizar
+    private void botonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonActualizarActionPerformed
+        // TODO add your handling code here:
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("p82dario");
+        FacturaJpaController control = new FacturaJpaController(emf);
+        
+        int pk = Integer.parseInt(codigoTextField.getText());
+        
+        try {
+            facturaJLabel.setText(control.findFactura(pk).toString());            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Ha habido un error buscando esta factura");
+        }
+        
+        
+    }//GEN-LAST:event_botonActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -94,27 +154,32 @@ public class VentanaActualizar extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaActualizar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaBuscar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaActualizar().setVisible(true);
+                new VentanaBuscar().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JButton botonActualizar;
     private javax.swing.JButton botonRegresar;
+    private javax.swing.JLabel codigoJLabel;
+    private javax.swing.JTextField codigoTextField;
+    private javax.swing.JLabel facturaJLabel;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

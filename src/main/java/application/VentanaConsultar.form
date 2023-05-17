@@ -100,7 +100,7 @@
           </AuxValues>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="60" y="190" width="930" height="110"/>
+              <AbsoluteConstraints x="60" y="130" width="930" height="280"/>
             </Constraint>
           </Constraints>
 
@@ -117,8 +117,6 @@
                   </Table>
                 </Property>
                 <Property name="showGrid" type="boolean" value="true"/>
-                <Property name="showHorizontalLines" type="boolean" value="true"/>
-                <Property name="showVerticalLines" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>

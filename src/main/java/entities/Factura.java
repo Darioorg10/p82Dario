@@ -5,6 +5,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -103,9 +104,20 @@ public class Factura implements Serializable {
         return true;
     }
 
+    // Vamos a formatear la fecha    
+//    SimpleDateFormat formateo = new SimpleDateFormat("yyyy-MM-dd");
+//    String fechaFormateada = formateo.format(fechaEmision);
+
     @Override
     public String toString() {
-        return "com.mycompany.p82dario.Factura[ codFactura=" + codFactura + " ]";
+        StringBuilder sb = new StringBuilder();
+        sb.append("<html>");
+        sb.append("Código: ").append(codFactura).append("<br/>");
+        sb.append("FechaEmision: ").append(fechaEmision).append("<br/>");
+        sb.append("Descripcion: ").append(descripcion).append("<br/>");
+        sb.append("Importe: ").append(totalImporteFactura);
+        sb.append("</html>");
+        return sb.toString();
     }
-    
+
 }

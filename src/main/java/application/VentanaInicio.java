@@ -64,9 +64,9 @@ public class VentanaInicio extends javax.swing.JFrame {
         PanelPrincipal.add(botonConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 270, 150));
 
         botonInsercion.setBackground(new java.awt.Color(255, 75, 0));
-        botonInsercion.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
+        botonInsercion.setFont(new java.awt.Font("Liberation Sans", 1, 30)); // NOI18N
         botonInsercion.setForeground(new java.awt.Color(238, 238, 238));
-        botonInsercion.setText("Insertar datos");
+        botonInsercion.setText("Insertar/modificar");
         botonInsercion.setBorder(null);
         botonInsercion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonInsercion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,7 +79,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         botonActualizar.setBackground(new java.awt.Color(255, 75, 0));
         botonActualizar.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
         botonActualizar.setForeground(new java.awt.Color(238, 238, 238));
-        botonActualizar.setText("Actualizar datos");
+        botonActualizar.setText("Buscar");
         botonActualizar.setBorder(null);
         botonActualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         botonActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,9 +95,9 @@ public class VentanaInicio extends javax.swing.JFrame {
         botonBorrar.setText("Borrar datos");
         botonBorrar.setBorder(null);
         botonBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        botonBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonBorrarMouseClicked(evt);
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarActionPerformed(evt);
             }
         });
         PanelPrincipal.add(botonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 330, 270, 150));
@@ -143,7 +143,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     private void botonActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonActualizarMouseClicked
         // TODO add your handling code here:        
         // Creamos un objeto de tipo de la ventanaActualizar y lo ponemos visible y en el centro
-        VentanaActualizar ventanaActualizar = new VentanaActualizar();
+        VentanaBuscar ventanaActualizar = new VentanaBuscar();
         ventanaActualizar.setVisible(true);         
         ventanaActualizar.setResizable(false);
         ventanaActualizar.setLocationRelativeTo(null);
@@ -152,16 +152,13 @@ public class VentanaInicio extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonActualizarMouseClicked
 
-    // Al pulsar el botón de eliminar datos
-    private void botonBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBorrarMouseClicked
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
         // TODO add your handling code here:
-        VentanaBorrar ventanaBorrar = new VentanaBorrar();
-        ventanaBorrar.setVisible(true);         
-        ventanaBorrar.setResizable(false);
-        ventanaBorrar.setLocationRelativeTo(null);
-        // Esto es para que la ventana actual se cierre
-        this.dispose();    
-    }//GEN-LAST:event_botonBorrarMouseClicked
+        VentanaBorrar borrar = new VentanaBorrar();
+        borrar.setVisible(true);
+        borrar.setLocationRelativeTo(null);
+        setVisible(false);
+    }//GEN-LAST:event_botonBorrarActionPerformed
                                                                
     
     

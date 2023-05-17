@@ -80,11 +80,9 @@ public class VentanaConsultar extends javax.swing.JFrame {
             }
         ));
         tabla.setShowGrid(true);
-        tabla.setShowHorizontalLines(true);
-        tabla.setShowVerticalLines(true);
         jScrollPane1.setViewportView(tabla);
 
-        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 930, 110));
+        PanelPrincipal.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 930, 280));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,17 +109,16 @@ public class VentanaConsultar extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
+
         // Vamos a crear un manejador de entidades, al que le tenemos que añadir el nombre que tenemos en el persistence.xml
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("p82dario");
-        
+
         // Creamos un controlador con el manejador de entidades
         controllers.FacturaJpaController controlador = new FacturaJpaController(emf);
-        
+
         // Creamos una lista con todas las facturas
-        List<Factura> listaFacturas = controlador.findFacturaEntities();
-        listaFacturas.forEach(System.out::println);
-        
+        List<Factura> listaFacturas = controlador.findFacturaEntities();        
+
         // Creamos un array de String que contenga los títulos que queremos insertar en la tabla
         String[] columnas = {"Codigo", "Fecha", "Descripcion", "Importe"};
 
@@ -135,20 +132,19 @@ public class VentanaConsultar extends javax.swing.JFrame {
             }
 
         };
-        
+
         modeloTabla.setColumnIdentifiers(columnas);
-        
+
         // Recorremos la lista añadiendo los datos
         for (Factura f : listaFacturas) {
             // Tenemos que meter los datos de cada factura en un array de tipo object
             Object[] filaFactura = {f.getCodFactura(), f.getFechaEmision(), f.getDescripcion(), f.getTotalImporteFactura()};
             modeloTabla.addRow(filaFactura); // Añadimos cada dato a cada fila
         }
-        
+
         // Hacemos que la tabla tome como modelo el que hemos creado
         tabla.setModel(modeloTabla);
     }//GEN-LAST:event_formWindowOpened
-
 
     /**
      * @param args the command line arguments
@@ -185,7 +181,7 @@ public class VentanaConsultar extends javax.swing.JFrame {
             public void run() {
                 new VentanaConsultar().setVisible(true);
             }
-        });                        
+        });
 
     }
 

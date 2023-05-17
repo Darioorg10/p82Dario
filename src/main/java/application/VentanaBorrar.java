@@ -4,6 +4,14 @@
  */
 package application;
 
+import controllers.FacturaJpaController;
+import controllers.exceptions.NonexistentEntityException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dario
@@ -14,7 +22,7 @@ public class VentanaBorrar extends javax.swing.JFrame {
      * Creates new form VentanaActualizar
      */
     public VentanaBorrar() {
-        initComponents();
+        initComponents();                
     }
 
     /**
@@ -29,6 +37,9 @@ public class VentanaBorrar extends javax.swing.JFrame {
         PanelPrincipal = new javax.swing.JPanel();
         botonRegresar = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
+        botonBorrar = new javax.swing.JButton();
+        texto = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,13 +57,40 @@ public class VentanaBorrar extends javax.swing.JFrame {
                 botonRegresarMouseClicked(evt);
             }
         });
-        PanelPrincipal.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 270, 110));
+        PanelPrincipal.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, 270, 110));
 
         titulo.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         titulo.setForeground(new java.awt.Color(0, 173, 181));
         titulo.setText("BORRA FACTURAS");
         titulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         PanelPrincipal.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 40, 350, 60));
+
+        botonBorrar.setBackground(new java.awt.Color(255, 75, 0));
+        botonBorrar.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
+        botonBorrar.setForeground(new java.awt.Color(238, 238, 238));
+        botonBorrar.setText("Borrar");
+        botonBorrar.setBorder(null);
+        botonBorrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonBorrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonBorrarMouseClicked(evt);
+            }
+        });
+        botonBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBorrarActionPerformed(evt);
+            }
+        });
+        PanelPrincipal.add(botonBorrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 270, 110));
+
+        texto.setBackground(new java.awt.Color(255, 255, 255));
+        texto.setForeground(new java.awt.Color(0, 0, 0));
+        PanelPrincipal.add(texto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 220, 230, 70));
+
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Código Factura:");
+        PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 210, 70));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +114,27 @@ public class VentanaBorrar extends javax.swing.JFrame {
         ventanaInicio.setResizable(false);
         this.dispose();
     }//GEN-LAST:event_botonRegresarMouseClicked
+
+    private void botonBorrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonBorrarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonBorrarMouseClicked
+
+    // Al darle al botón de borrar
+    private void botonBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBorrarActionPerformed
+        // TODO add your handling code here:
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("p82dario");
+        FacturaJpaController control = new FacturaJpaController(emf);
+
+        int pk = Integer.parseInt(texto.getText());
+        
+        try {
+            control.destroy(pk);
+            JOptionPane.showMessageDialog(null, "La factura de pk " + pk + " ha sido eliminada satisfactoriamente");
+        } catch (NonexistentEntityException ex) {
+            Logger.getLogger(VentanaBorrar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_botonBorrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,7 +174,10 @@ public class VentanaBorrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JButton botonBorrar;
     private javax.swing.JButton botonRegresar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField texto;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }

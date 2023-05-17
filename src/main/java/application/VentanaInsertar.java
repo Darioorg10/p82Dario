@@ -4,6 +4,17 @@
  */
 package application;
 
+import controllers.FacturaJpaController;
+import entities.Factura;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author dario
@@ -29,6 +40,15 @@ public class VentanaInsertar extends javax.swing.JFrame {
         PanelPrincipal = new javax.swing.JPanel();
         botonRegresar = new javax.swing.JButton();
         titulo = new javax.swing.JLabel();
+        codigoJLabel = new javax.swing.JLabel();
+        codigoTextField = new javax.swing.JTextField();
+        fechaTextField = new javax.swing.JTextField();
+        fechaJLabel = new javax.swing.JLabel();
+        descripcionTextField = new javax.swing.JTextField();
+        descripcionJLabel = new javax.swing.JLabel();
+        importeTextField = new javax.swing.JTextField();
+        importeJLabel = new javax.swing.JLabel();
+        botonInsertar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,13 +66,63 @@ public class VentanaInsertar extends javax.swing.JFrame {
                 botonRegresarMouseClicked(evt);
             }
         });
-        PanelPrincipal.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 270, 110));
+        PanelPrincipal.add(botonRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 380, 270, 110));
 
         titulo.setFont(new java.awt.Font("Liberation Sans", 1, 36)); // NOI18N
         titulo.setForeground(new java.awt.Color(0, 173, 181));
         titulo.setText("INSERTA FACTURAS");
         titulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         PanelPrincipal.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 370, 60));
+
+        codigoJLabel.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        codigoJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        codigoJLabel.setText("- Codigo:");
+        PanelPrincipal.add(codigoJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 120, 50));
+
+        codigoTextField.setBackground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.add(codigoTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 270, 40));
+
+        fechaTextField.setBackground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.add(fechaTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, 270, 40));
+
+        fechaJLabel.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        fechaJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        fechaJLabel.setText("- FechaEmision:");
+        PanelPrincipal.add(fechaJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 190, 50));
+
+        descripcionTextField.setBackground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.add(descripcionTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 270, 40));
+
+        descripcionJLabel.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        descripcionJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        descripcionJLabel.setText("- Descripcion:");
+        PanelPrincipal.add(descripcionJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 170, 50));
+
+        importeTextField.setBackground(new java.awt.Color(255, 255, 255));
+        PanelPrincipal.add(importeTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 270, 40));
+
+        importeJLabel.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
+        importeJLabel.setForeground(new java.awt.Color(255, 255, 255));
+        importeJLabel.setText("- Importe:");
+        PanelPrincipal.add(importeJLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 370, 120, 50));
+
+        botonInsertar.setBackground(new java.awt.Color(255, 75, 0));
+        botonInsertar.setFont(new java.awt.Font("Liberation Sans", 1, 33)); // NOI18N
+        botonInsertar.setForeground(new java.awt.Color(238, 238, 238));
+        botonInsertar.setText("Insertar");
+        botonInsertar.setBorder(null);
+        botonInsertar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        botonInsertar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonInsertarMouseClicked(evt);
+            }
+        });
+        botonInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonInsertarActionPerformed(evt);
+            }
+        });
+        PanelPrincipal.add(botonInsertar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 190, 270, 110));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +146,49 @@ public class VentanaInsertar extends javax.swing.JFrame {
         ventanaInicio.setResizable(false);
         this.dispose();
     }//GEN-LAST:event_botonRegresarMouseClicked
+
+    private void botonInsertarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonInsertarMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botonInsertarMouseClicked
+
+    // Cuando le demos al botón de insertar
+    private void botonInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonInsertarActionPerformed
+        // TODO add your handling code here:
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("p82dario");
+        FacturaJpaController control = new FacturaJpaController(emf);
+        
+        // Creamos los variables de los datos que vamos a insertar
+        int pk = Integer.parseInt(codigoTextField.getText());
+        String descripcion = descripcionTextField.getText();        
+        SimpleDateFormat formateo = new SimpleDateFormat("yyyy-MM-dd"); // Formateamos la fecha
+        Date fecha = null;
+        
+        try {
+            fecha = formateo.parse(fechaTextField.getText());
+        } catch (ParseException pe) {
+            System.out.println(pe.getMessage());
+        }
+        
+        Double importe = Double.parseDouble(importeTextField.getText());
+        
+        
+        // Creamos la factura genérica que vayamos a insertar, con la clave primaria que nos ha dado el usuario
+        Factura factura = new Factura(pk);
+        
+        // Le damos los valores a la factura
+        factura.setDescripcion(descripcion);
+        factura.setFechaEmision(fecha);
+        factura.setTotalImporteFactura(importe);
+        
+        try {
+            control.edit(factura);
+            JOptionPane.showMessageDialog(null, "La factura ha sido insertada correctamente");
+        } catch (Exception ex) {
+            Logger.getLogger(VentanaInsertar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_botonInsertarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -117,7 +230,16 @@ public class VentanaInsertar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelPrincipal;
+    private javax.swing.JButton botonInsertar;
     private javax.swing.JButton botonRegresar;
+    private javax.swing.JLabel codigoJLabel;
+    private javax.swing.JTextField codigoTextField;
+    private javax.swing.JLabel descripcionJLabel;
+    private javax.swing.JTextField descripcionTextField;
+    private javax.swing.JLabel fechaJLabel;
+    private javax.swing.JTextField fechaTextField;
+    private javax.swing.JLabel importeJLabel;
+    private javax.swing.JTextField importeTextField;
     private javax.swing.JLabel titulo;
     // End of variables declaration//GEN-END:variables
 }
