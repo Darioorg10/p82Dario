@@ -6,6 +6,7 @@ package application;
 
 import controllers.FacturaJpaController;
 import entities.Factura;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -117,7 +118,7 @@ public class VentanaConsultar extends javax.swing.JFrame {
         controllers.FacturaJpaController controlador = new FacturaJpaController(emf);
 
         // Creamos una lista con todas las facturas
-        List<Factura> listaFacturas = controlador.findFacturaEntities();        
+        List<Factura> listaFacturas = controlador.findFacturaEntities();
 
         // Creamos un array de String que contenga los títulos que queremos insertar en la tabla
         String[] columnas = {"Codigo", "Fecha", "Descripcion", "Importe"};
@@ -138,7 +139,9 @@ public class VentanaConsultar extends javax.swing.JFrame {
         // Recorremos la lista añadiendo los datos
         for (Factura f : listaFacturas) {
             // Tenemos que meter los datos de cada factura en un array de tipo object
-            Object[] filaFactura = {f.getCodFactura(), f.getFechaEmision(), f.getDescripcion(), f.getTotalImporteFactura()};
+            SimpleDateFormat formateo = new SimpleDateFormat("yyyy-MM-dd");
+            String fechaFormateada = formateo.format(f.getFechaEmision());
+            Object[] filaFactura = {f.getCodFactura(), fechaFormateada, f.getDescripcion(), f.getTotalImporteFactura()};
             modeloTabla.addRow(filaFactura); // Añadimos cada dato a cada fila
         }
 

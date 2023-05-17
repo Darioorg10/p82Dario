@@ -141,9 +141,9 @@ public class VentanaInsertar extends javax.swing.JFrame {
     private void botonRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegresarMouseClicked
         // TODO add your handling code here:
         VentanaInicio ventanaInicio = new VentanaInicio();
-        ventanaInicio.setVisible(true);
-        ventanaInicio.setLocationRelativeTo(null);
+        ventanaInicio.setVisible(true);        
         ventanaInicio.setResizable(false);
+        ventanaInicio.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_botonRegresarMouseClicked
 
